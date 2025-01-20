@@ -42,7 +42,7 @@ jobs:
   versioning:
     runs-on: ubuntu-latest
     needs: test
-    if: github.ref_name == 'master' || startsWith(github.ref_name, 'demo/')
+    if: github.ref_name == 'master'
 
     steps:
       - name: Checkout code
