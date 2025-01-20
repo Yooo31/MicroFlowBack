@@ -3,9 +3,9 @@
     "express": "^4.21.2"
   },
   "scripts": {
-    "dev": "ts-node src/server.ts",
+    "dev": "ts-node src/dev.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "node dist/dev.js",
     "test": "jest"
   },
   "devDependencies": {
