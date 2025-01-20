@@ -59,9 +59,15 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t myapp:${{ github.sha }} .
-          docker tag myapp:${{ github.sha }} mydockerhubuser/myapp:latest
-          docker push mydockerhubuser/myapp:latest
+          docker build -t mircroflow:${{ github.sha }} .
+          # Condition pour taguer en fonction de la branche
+          if [[ "${GITHUB_REF}" == "refs/heads/master" ]]; then
+            docker tag mircroflow:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/mircroflow:latest
+            docker push ${{ secrets.DOCKER_USERNAME }}/mircroflow:latest
+          elif [[ "${GITHUB_REF}" == refs/heads/demo/* ]]; then
+            docker tag mircroflow:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/mircroflow:demo
+            docker push ${{ secrets.DOCKER_USERNAME }}/mircroflow:demo
+          fi
 
       - name: Notify Telegram on Build Success
         if: success()
