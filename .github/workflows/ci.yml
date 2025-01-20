@@ -41,7 +41,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: versioning
+    needs: test
     if: github.ref_name == 'master' || startsWith(github.ref_name, 'demo/')
 
     steps:
@@ -79,7 +79,7 @@ jobs:
 
   versioning:
     runs-on: ubuntu-latest
-    needs: test
+    needs: build
     if: github.ref_name == 'master'
 
     steps:
