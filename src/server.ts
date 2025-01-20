@@ -1,4 +1,5 @@
 import express from 'express';
+
 const app = express();
 
 app.get('/', (_req, res) => {
@@ -6,8 +7,17 @@ app.get('/', (_req, res) => {
 });
 
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+
+let server: any;
+export const startServer = () => {
+  server = app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
+  return server;
+};
+
+export const stopServer = () => {
+  server.close();
+};
 
 export default app;

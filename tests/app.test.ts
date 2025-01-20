@@ -1,5 +1,15 @@
 import request from 'supertest';
-import app from '../src/server';
+import app, { startServer, stopServer } from '../src/server';
+
+let server: any;
+
+beforeAll(() => {
+  server = startServer();
+});
+
+afterAll(() => {
+  stopServer();
+});
 
 describe('GET /', () => {
   it('should return "Hello, World!"', async () => {
