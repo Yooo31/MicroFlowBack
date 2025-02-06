@@ -1,22 +1,22 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 
 const app = express();
+const PORT = process.env.PORT || 4000;
 
-app.get('/', (_req, res) => {
+let server: ReturnType<typeof app.listen>;
+
+app.get('/', (_req: Request, res: Response): void => {
   res.send('Hello, World!');
 });
 
-const PORT = process.env.PORT || 4000;
-
-let server: any;
-export const startServer = () => {
+export const startServer = (): typeof server => {
   server = app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
   });
   return server;
 };
 
-export const stopServer = () => {
+export const stopServer = (): void => {
   server.close();
 };
 
