@@ -1,10 +1,8 @@
 import request from 'supertest';
 import app, { startServer, stopServer } from '../src/server';
 
-let server: any;
-
 beforeAll(() => {
-  server = startServer();
+  startServer();
 });
 
 afterAll(() => {
